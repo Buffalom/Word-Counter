@@ -109,10 +109,9 @@ $(function(){
   // Generate Sort-By-Buttons
   var sortBy = 'count';
   var sortOrder = 'desc';
-  $('.btn-sort').click(function(){
+  $('#sort_btn_block').on('click', '.btn-sort', function(){
     var id = this.id;
     if (id == 'wordAsc') {
-      console.log(1);
       sortBy = 'word';
       sortOrder = 'asc';
     } else if (id == 'wordDesc') {
