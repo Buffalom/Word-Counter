@@ -1,0 +1,11 @@
+textarea {
+  resize: vertical;
+}
+
+table {
+  display: block;
+  height: 250px;
+  overflow-y: scroll;
+  border-spacing: collapse;
+  border-spacing: 0;
+}
