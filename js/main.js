@@ -15,17 +15,6 @@ $(function(){
     }
   };
 
-  // Print Words
-  function printWords(words) {
-    var code = "";
-    var x = 0;
-    while (x < words.length) {
-      code += "<tr><td>" + words[x].word + "</td><td>" + words[x].count + "</td></tr>";
-      x++;
-    }
-    $('.word-table > tbody').html(code);
-  }
-
   // Delete empty Array-Elements
   Array.prototype.clean = function(deleteValue) {
     for (var i = 0; i < this.length; i++) {
@@ -57,6 +46,27 @@ $(function(){
     var a = a.word;
     var b = b.word; 
     return ((a > b) ? -1 : ((a < b) ? 1 : 0));
+  }
+
+  // Print Words
+  function printWords(words) {
+    var code = "";
+    var x = 0;
+    while (x < words.length) {
+      code += "<tr><td>" + words[x].word + "</td><td>" + words[x].count + "</td></tr>";
+      x++;
+    }
+    $('.word-table > tbody').html(code);
+  }
+
+  // Print Words
+  function printStats(words) {
+    var code = "";
+    words.sort(sortByCountDesc);
+    code += "<tr><th>Most used Word</th><td>" + words[0].word + "</td><td>" + words[0].count + "</td></tr>";
+    code += "<tr><th>Average Count</th><td>" + (words[0].word) + "</td><td></td></tr>";
+    
+    $('.stats-table > tbody').html(code);
   }
 
   // Count Words
@@ -93,6 +103,11 @@ $(function(){
     } else {
       printWords(words.sort(sortByCountDesc));
     }
+    printStats(words);
+  }
+
+  function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
   }
 
 
@@ -169,4 +184,8 @@ $(function(){
   
   // Count Words
   $('#text').bind('input propertychange', countWords);
+
+
+  // Stats
+
 });
