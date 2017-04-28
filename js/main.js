@@ -114,8 +114,14 @@ $(function(){
   var words = [];
   function countWords() {
     var text = $('#text').val();
+    words = [];
     var wordsTemplate;
-    text = text.toLowerCase().replace(/[^\u00c4\u00e4\u00d6\u00f6\u00dc\u00fc\u00dfa-z0-9]/gi, ' ').split(/[ \r?\n|\r]+/).clean("");
+    text = text
+      .toLowerCase()
+      .replace(/[^\u00c4\u00e4\u00d6\u00f6\u00dc\u00fc\u00dfa-z0-9]/gi, ' ')
+      .trim()
+      .split(/[ \r?\n|\r]+/)
+      .clean("");
 
     text.forEach(function(part) {
       var x = 0;

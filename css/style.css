@@ -11,7 +11,7 @@ table {
   overflow: auto;
 }
 table.word-table {
-  height: 30vh;
+  height: 25vh;
   border-spacing: collapse;
   border-spacing: 0;
 }
