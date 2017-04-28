@@ -26,6 +26,33 @@ $(function(){
     return this;
   };
 
+  // Average Count
+  function calcStats(words) {
+    var stats = {};
+
+    var sum = 0;
+    var sumChar = 0;
+    var longWord = {
+      'word': '',
+      'count': 0
+    };
+    words.forEach(function(word) {
+      sum += word.count;
+      sumChar += word.word.length;
+      if (word.word.length > longWord.word.length) {
+        longWord = word;
+      }
+    }, this);
+    stats.sum = sum;
+    stats.sumChar = sumChar;
+    stats.avg = Math.round((sum / words.length) * 100) / 100;
+    stats.avgChar = Math.round((sumChar / words.length) * 100) / 100;
+    stats.longWord = longWord;
+    stats.readTime = Math.round(sum / 275) + " min";
+
+    return stats;
+  }
+
   // Sort Array
   function sortByCountAsc(a, b){
     var a = a.count;
@@ -59,17 +86,23 @@ $(function(){
     $('.word-table > tbody').html(code);
   }
 
-  // Print Words
+  // Print Stats
   function printStats(words) {
     var code = "";
     words.sort(sortByCountDesc);
-    code += "<tr><th>Most used Word</th><td>" + words[0].word + "</td><td>" + words[0].count + "</td></tr>";
-    code += "<tr><th>Average Count</th><td>" + (words[0].word) + "</td><td></td></tr>";
+    var stats = calcStats(words);
+    code += "<tr><th>Words</th><td>" + stats.sum + "</td><td></td></tr>";
+    code += "<tr><th>Characters</th><td>" + stats.sumChar + "</td><td></td></tr>";
+    code += "<tr><th>Average Count</th><td>" + stats.avg + "</td><td></td></tr>";
+    code += "<tr><th>Average Characters</th><td>" + stats.avgChar + "</td><td></td></tr>";
+    code += "<tr><th>Longest Word</th><td>" + stats.longWord.word + "</td><td>" + stats.longWord.count + "</td></tr>";
+    code += "<tr><th>Reading Time (275 Words/min)</th><td>" + stats.readTime + "</td><td></td></tr>";
     
     $('.stats-table > tbody').html(code);
   }
 
   // Count Words
+  var words
   function countWords() {
     var text = $('#text').val();
     var wordsTemplate;
@@ -184,8 +217,4 @@ $(function(){
   
   // Count Words
   $('#text').bind('input propertychange', countWords);
-
-
-  // Stats
-
 });
