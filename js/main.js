@@ -27,7 +27,7 @@ $(function(){
   };
 
   // Average Count
-  function calcStats(words) {
+  function calcStats() {
     var stats = {};
 
     var sum = 0;
@@ -76,21 +76,30 @@ $(function(){
   }
 
   // Print Words
-  function printWords(words) {
+  function printWord(pos) {
+    return "<tr><td>" + words[pos].word + "</td><td>" + words[pos].count + "</td></tr>";
+  }
+
+  function printWords(searchTerm) {
     var code = "";
+    var searchRegex = new RegExp(searchTerm, "i");
     var x = 0;
     while (x < words.length) {
-      code += "<tr><td>" + words[x].word + "</td><td>" + words[x].count + "</td></tr>";
+      if (searchTerm == '' || searchTerm == null) {
+        code += printWord(x);
+      } else if (searchRegex.test(words[x].word)) {
+        code += printWord(x);
+      }
       x++;
     }
     $('.word-table > tbody').html(code);
   }
 
   // Print Stats
-  function printStats(words) {
+  function printStats() {
     var code = "";
     words.sort(sortByCountDesc);
-    var stats = calcStats(words);
+    var stats = calcStats();
     code += "<tr><th>Words</th><td>" + stats.sum + "</td><td></td></tr>";
     code += "<tr><th>Characters</th><td>" + stats.sumChar + "</td><td></td></tr>";
     code += "<tr><th>Average Count</th><td>" + stats.avg + "</td><td></td></tr>";
@@ -102,11 +111,10 @@ $(function(){
   }
 
   // Count Words
-  var words
+  var words = [];
   function countWords() {
     var text = $('#text').val();
     var wordsTemplate;
-    var words = [];
     text = text.toLowerCase().replace(/[^\u00c4\u00e4\u00d6\u00f6\u00dc\u00fc\u00dfa-z0-9]/gi, ' ').split(/[ \r?\n|\r]+/).clean("");
 
     text.forEach(function(part) {
@@ -128,15 +136,16 @@ $(function(){
     }, this);
     
     if (sortBy == 'word' && sortOrder != 'desc') {
-      printWords(words.sort(sortByWordAsc));
+      words = words.sort(sortByWordAsc);
     } else if (sortBy == 'word' && sortOrder == 'desc') {
-      printWords(words.sort(sortByWordDesc));
+      words = words.sort(sortByWordDesc);
     } else if (sortBy == 'count' && sortOrder == 'asc') {
-      printWords(words.sort(sortByCountAsc));
+      words = words.sort(sortByCountAsc);
     } else {
-      printWords(words.sort(sortByCountDesc));
+      words = words.sort(sortByCountDesc);
     }
-    printStats(words);
+    printWords(null);
+    printStats();
   }
 
   function sleep(ms) {
@@ -217,4 +226,9 @@ $(function(){
   
   // Count Words
   $('#text').bind('input propertychange', countWords);
+  
+  // Search
+  $('#search').bind('input propertychange', function() {
+    printWords(this.value);
+  });
 });
