@@ -54,22 +54,32 @@
           <hr />
           <div id="sort_btn_block">
             <h4><small>Sort by:</small> Count descending</h4>
-            <a class="btn btn-default" href="index.html?sortBy=word" role="button">Word ASC</a>
-            <a class="btn btn-default" href="index.html?sortBy=count&sortOrder=asc" role="button">Count ASC</a>
+            <button class="btn btn-default btn-sort" id="wordAsc" role="button">Word ASC</button>
+            <button class="btn btn-default btn-sort" id="countAsc"  role="button">Count ASC</button>
           </div>
           <br />
-          <table class="table word-table table-striped table-hover">
-            <thead>
-              <tr>
-                <th>Word</th>
-                <th>Count</th>
-              </tr>
-            </thead>
-            <tbody>
+          <div class="col-lg-6">
+            <h3>Words</h3>
+            <table class="table word-table table-striped table-hover">
+              <thead>
+                <tr>
+                  <th>Word</th>
+                  <th>Count</th>
+                </tr>
+              </thead>
+              <tbody>
 
-            </tbody>
+              </tbody>
             </table>
-          </form>
+          </div>
+          <div class="col-lg-6">
+            <h3>Stats</h3>
+            <table class="table stats-table table-striped table-hover">
+              <tbody>
+
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
 

@@ -2,7 +2,7 @@ textarea {
   resize: vertical;
 }
 
-table {
+table.word-table {
   display: block;
   height: 250px;
   overflow-y: scroll;
