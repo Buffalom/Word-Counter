@@ -100,12 +100,12 @@ $(function(){
     var code = "";
     words.sort(sortByCountDesc);
     var stats = calcStats();
-    code += "<tr><th>Words</th><td>" + stats.sum + "</td><td></td></tr>";
-    code += "<tr><th>Characters</th><td>" + stats.sumChar + "</td><td></td></tr>";
-    code += "<tr><th>Average Count</th><td>" + stats.avg + "</td><td></td></tr>";
-    code += "<tr><th>Average Characters</th><td>" + stats.avgChar + "</td><td></td></tr>";
-    code += "<tr><th>Longest Word</th><td>" + stats.longWord.word + "</td><td>" + stats.longWord.count + "</td></tr>";
-    code += "<tr><th>Reading Time (275 Words/min)</th><td>" + stats.readTime + "</td><td></td></tr>";
+    code += "<tr><th>Words</th><td>" + stats.sum + "</td></tr>";
+    code += "<tr><th>Characters</th><td>" + stats.sumChar + "</td></tr>";
+    code += "<tr><th>Average Count</th><td>" + stats.avg + "</td></tr>";
+    code += "<tr><th>Average Characters</th><td>" + stats.avgChar + "</td></tr>";
+    code += "<tr><th>Longest Word</th><td>" + stats.longWord.word + "</td></tr>";
+    code += "<tr><th>Reading Time (275 Words/min)</th><td>" + stats.readTime + "</td></tr>";
     
     $('.stats-table > tbody').html(code);
   }
