@@ -150,7 +150,7 @@ $(function(){
     } else {
       words = words.sort(sortByCountDesc);
     }
-    printWords(null);
+    printWords($('#search').val());
     printStats();
   }
 
